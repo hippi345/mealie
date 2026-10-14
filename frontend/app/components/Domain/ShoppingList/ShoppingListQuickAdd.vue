@@ -19,6 +19,7 @@
       hide-no-data
       @update:model-value="onSelect"
       @keyup.enter="submit()"
+      @keydown.tab="handleTab"
     >
       <template #append-inner>
         <v-tooltip
@@ -137,6 +138,12 @@ const pickedFood = computed(() => selected.value && typeof selected.value === "o
 function onSelect() {
   if (pickedFood.value && !showDetails.value) {
     submit();
+  }
+}
+
+function handleTab() {
+  if (search.value && !selected.value && filteredFoods.value.length > 0) {
+    selected.value = filteredFoods.value[0];
   }
 }
 

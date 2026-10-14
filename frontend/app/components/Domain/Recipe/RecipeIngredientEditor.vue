@@ -63,6 +63,7 @@
               clearable
               :menu-props="{ attach: props.menuAttachTarget, maxHeight: '250px' }"
               @keyup.enter="handleUnitEnter"
+              @keydown.tab="handleUnitTab"
             >
               <template v-if="unitError" #prepend-inner>
                 <v-tooltip location="bottom">
@@ -115,6 +116,7 @@
               clearable
               :menu-props="{ attach: props.menuAttachTarget, maxHeight: '250px' }"
               @keyup.enter="handleFoodEnter"
+              @keydown.tab="handleFoodTab"
             >
               <template v-if="foodError" #prepend-inner>
                 <v-tooltip location="bottom">
@@ -450,6 +452,18 @@ function handleFoodEnter() {
     || !model.value.food.name.includes(foodSearch.value)
   ) {
     createAssignFood();
+  }
+}
+
+function handleUnitTab() {
+  if (unitSearch.value && !model.value.unit && filteredUnits.value.length > 0) {
+    model.value.unit = filteredUnits.value[0];
+  }
+}
+
+function handleFoodTab() {
+  if (foodSearch.value && !model.value.food && filteredFoods.value.length > 0) {
+    model.value.food = filteredFoods.value[0];
   }
 }
 
